@@ -1,0 +1,15 @@
+name = "StanVariational"
+uuid = "6ede68ce-8466-5085-8a79-4c4de3d9cf4a"
+authors = ["Rob J Goedman <goedman@mac.com>"]
+version = "0.1.0"
+
+[deps]
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
+
+[compat]
+julia = "^1"

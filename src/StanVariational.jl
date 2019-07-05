@@ -1,0 +1,3 @@
+module StanVariational
+
+end # module
