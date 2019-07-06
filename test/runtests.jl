@@ -26,6 +26,6 @@ if sample_file !== Nothing
   # Read sample summary (in ChainDataFrame format)
   sdf = read_summary(stanmodel)
 
-  @test sdf[:theta, :mean][1] ≈ 0.32 atol=0.2
+  @test sdf[:theta, :mean][1] ≈ 0.32 atol=0.1
 
 end
