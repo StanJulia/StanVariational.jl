@@ -61,7 +61,7 @@ stan_summary(
 ```
 """
 function stan_summary(
-  model::CmdStanSampleModel; 
+  model::CmdStanModel; 
   printsummary=false)
   
   local csvfile

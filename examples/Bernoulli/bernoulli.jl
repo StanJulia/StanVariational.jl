@@ -27,15 +27,8 @@ stanmodel = CmdStanVariationalModel(
 (sample_file, log_file) = stan_sample(stanmodel; data=bernoulli_data)
 
 if sample_file !== Nothing
-  # Use StanSamples to read a chain in NamedTupla format
-  nt = read_samples(stanmodel.sm; chain = 3)
 
-  # Convert to an MCMCChains.Chains object
-  chns = read_samples(stanmodel)
-
-  # Describe the MCMCChains using MCMCChains statistics
-  cdf = describe(chns)
-  display(cdf)
+  (chns, cnames) = read_variational(stanmodel)
 
   # Show the same output in DataFrame format
   sdf = read_summary(stanmodel)

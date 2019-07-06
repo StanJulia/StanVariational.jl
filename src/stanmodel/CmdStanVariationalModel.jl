@@ -88,7 +88,7 @@ function model_show(io::IO, m::CmdStanVariationalModel, compact::Bool)
   println("    diagnostics_file =        \"$(m.output.diagnostic_file)\"")
   println("    refresh =                 $(m.output.refresh)")
   println("  tmpdir =                  \"$(m.tmpdir)\"")
-  sample_show(io, m.method, compact)
+  variational_show(io, m.method, compact)
 end
 
 show(io::IO, m::CmdStanVariationalModel) = model_show(io, m, false)

@@ -30,7 +30,7 @@ function cmdline(m, id)
     output file=bernoulli3_samples_1.csv refresh=100`,
   =#
   cmd = ``
-  if isa(m, CmdStanSampleModel)
+  if isa(m, CmdStanVariationalModel)
     # Handle the model name field for unix and windows
     cmd = `$(m.exec_path)`
 
@@ -65,33 +65,9 @@ function cmdline(m, id)
   else
     
     # The 'recursive' part
-    if isa(m, SamplingAlgorithm)
-      cmd = `$cmd algorithm=$(split(lowercase(string(typeof(m))), '.')[end])`
-    elseif isa(m, Engine)
-      cmd = `$cmd engine=$(split(lowercase(string(typeof(m))), '.')[end])`
-    else
-      cmd = `$cmd $(split(lowercase(string(typeof(m))), '.')[end])`
-    end
+    cmd = `$cmd $(split(lowercase(string(typeof(m))), '.')[end])`
     for name in fieldnames(typeof(m))
-      if  isa(getfield(m, name), String) || isa(getfield(m, name), Tuple)
-        cmd = `$cmd $(name)=$(getfield(m, name))`
-      elseif length(fieldnames(typeof(getfield(m, name)))) == 0
-        if isa(getfield(m, name), Bool)
-          cmd = `$cmd $(name)=$(getfield(m, name) ? 1 : 0)`
-        else
-          if name == :metric || isa(getfield(m, name), DataType)
-            cmd = `$cmd $(name)=$(split(lowercase(string(typeof(getfield(m, name)))), '.')[end])`
-          else
-            if name == :algorithm && typeof(getfield(m, name)) == CmdStan.Fixed_param
-              cmd = `$cmd $(name)=fixed_param`
-            else
-              cmd = `$cmd $(name)=$(getfield(m, name))`
-            end
-          end
-        end
-      else
-        cmd = `$cmd $(cmdline(getfield(m, name), id))`
-      end
+      cmd = `$cmd $(name)=$(getfield(m, name))`
     end
   end
   

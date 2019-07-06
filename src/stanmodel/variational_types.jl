@@ -1,4 +1,4 @@
-mutable struct Variational <: Method
+mutable struct Variational <: AbstractStanMethod
   algorithm::Symbol
   grad_samples::Int64
   elbo_samples::Int64

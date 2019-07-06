@@ -1,5 +1,5 @@
 data_union = Union{Nothing, AbstractString, Dict, Array{T, 1} where T}
-init_union = Union{Nothing, StanSample.Init, AbstractString, Dict, Array{T, 1} where T}
+init_union = Union{Nothing, StanVariational.Init, AbstractString, Dict, Array{T, 1} where T}
 
 """
 $(SIGNATURES)

@@ -31,12 +31,14 @@ include("stanmodel/update_model_file.jl")
 include("stanmodel/number_of_chains.jl")
 include("stanrun/cmdline.jl")
 include("stanrun/stan_sample.jl")
-include("stansamples/read_samples.jl")
+include("stansamples/read_variational.jl")
 include("stansamples/stan_summary.jl")
 include("stansamples/read_summary.jl")
 
 export
+  CmdStanModel,
   CmdStanVariationalModel,
+  read_variational,
   read_summary,
   stan_summary
 
