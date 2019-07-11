@@ -17,7 +17,7 @@ model {
 
 bernoulli_data = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
-stanmodel = CmdStanVariationalModel("bernoulli", bernoulli_model)
+stanmodel = VariationalModel("bernoulli", bernoulli_model)
 
 (sample_file, log_file) = stan_sample(stanmodel; data=bernoulli_data)
 
