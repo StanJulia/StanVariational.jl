@@ -8,6 +8,7 @@ mutable struct Variational <: AbstractStanMethod
   eval_elbo::Int64
   output_samples::Int64
 end
+
 """
 
 # Variational type and constructor
