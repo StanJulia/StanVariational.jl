@@ -11,7 +11,7 @@
 
 ## Important note
 
-### This is not a package being tested for release. If succesful, it might be used in CmdStan.jl v6 or as a support package underlying CmdStan.jl,
+### Refactoring CmdStan.jl v6. Maybe this is an ok approach.
 
 ## Installation
 
@@ -21,7 +21,7 @@ This package is not registered. Install with
 pkg> add https://github.com/StanJulia/StanVariational.jl
 ```
 
-You need a working [CmdStan](https://mc-stan.org/users/interfaces/cmdstan.html) installation, the path of which you should specify in `JULIA_CMDSTAN_HOME`, eg in your `~/.julia/config/startup.jl` have a line like
+You need a working [cmdstan](https://mc-stan.org/users/interfaces/cmdstan.html) installation, the path of which you should specify in `JULIA_CMDSTAN_HOME`, eg in your `~/.julia/config/startup.jl` have a line like
 ```julia
 # CmdStan setup
 ENV["JULIA_CMDSTAN_HOME"] = expanduser("~/src/cmdstan-2.19.1/") # replace with your path
