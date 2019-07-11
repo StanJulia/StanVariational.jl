@@ -12,34 +12,20 @@ module StanVariational
 
 using Reexport
 
-@reexport using Unicode, DelimitedFiles, Distributed
-@reexport using StanDump
-@reexport using StanRun
-@reexport using StanSamples
-@reexport using MCMCChains
-@reexport using Parameters
+@reexport using StanBase
 
 using DocStringExtensions: FIELDS, SIGNATURES, TYPEDEF
 
 import StanRun: stan_sample, stan_cmd_and_paths, default_output_base
-import StanSamples: read_samples
+import StanBase: cmdline
 
-include("stanmodel/top_level_types.jl")
 include("stanmodel/variational_types.jl")
-include("stanmodel/CmdStanVariationalModel.jl")
-include("stanmodel/update_model_file.jl")
-include("stanmodel/number_of_chains.jl")
+include("stanmodel/VariationalModel.jl")
 include("stanrun/cmdline.jl")
-include("stanrun/stan_sample.jl")
 include("stansamples/read_variational.jl")
-include("stansamples/stan_summary.jl")
-include("stansamples/read_summary.jl")
 
 export
-  CmdStanModel,
-  CmdStanVariationalModel,
-  read_variational,
-  read_summary,
-  stan_summary
+  VariationalModel,
+  read_variational
 
 end # module

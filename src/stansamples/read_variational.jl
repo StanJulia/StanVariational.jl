@@ -6,16 +6,16 @@ Read variational sample output files created by cmdstan.
 
 ### Method
 ```julia
-read_variational(m::CmdStanVariationalModelodel)
+read_variational(m::VariationalModelodel)
 ```
 
 ### Required arguments
 ```julia
-* `m::CmdStanVariationalModel`    : CmdStanVariationalModel object
+* `m::VariationalModel`    : VariationalModel object
 ```
 
 """
-function read_variational(m::CmdStanVariationalModel)
+function read_variational(m::VariationalModel)
 
   local a3d, index, idx, indvec
   

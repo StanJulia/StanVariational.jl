@@ -21,7 +21,7 @@ bernoulli_data = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 # Keep tmpdir across multiple runs to prevent re-compilation
 tmpdir = joinpath(@__DIR__, "tmp")
 
-stanmodel = CmdStanVariationalModel(
+stanmodel = VariationalModel(
   "bernoulli", bernoulli_model; tmpdir = tmpdir)
 
 (sample_file, log_file) = stan_sample(stanmodel; data=bernoulli_data)

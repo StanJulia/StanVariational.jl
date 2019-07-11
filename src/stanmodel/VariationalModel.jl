@@ -1,9 +1,7 @@
-import Base: show
-
 """
-# CmdStanVariationalModel 
+# VariationalModel 
 
-Create a CmdStanVariationalModel. 
+Create a VariationalModel. 
 
 ### Required arguments
 ```julia
@@ -14,10 +12,9 @@ Create a CmdStanVariationalModel.
 ### Optional arguments
 ```julia
 * `n_chains::Vector{Int64}=[4]`        : Optionally updated in stan_sample()
-* `method::AbstractStanMethod`         : See ?Method (default: Sample())
-* `random::Random`                     : Random seed settings
-* `output::Output`              : File output options
-* `init::Init`                         : Default interval bound for parameters
+* `seed::StanBase.RandomSeed`          : Random seed settings
+* `output::StanBase.Output`            : File output options
+* `init::StanBase.Init`                : Default interval bound for parameters
 * `tmpdir::AbstractString`             : Directory where output files are stored
 * `output_base::AbstractString`        : Base name for output files
 * `exec_path::AbstractString`          : Path to cmdstan executable
@@ -30,57 +27,41 @@ Create a CmdStanVariationalModel.
 * `summary=true`                       : Create computed stan summary
 * `printsummary=true`                  : Show computed stan summary
 * `sm::StanRun.StanModel`              : StanRun.StanModel
+* `method::Variational`                        : Will be Variational()
 ```
 
 """
-struct CmdStanVariationalModel <: CmdStanModel
-  name::AbstractString
-  model::AbstractString
-  n_chains::Vector{Int64}
-  method::AbstractStanMethod
-  random::Random
-  init::Init
-  output::Output
-  tmpdir::AbstractString
-  output_base::AbstractString
-  exec_path::AbstractString
-  data_file::Vector{String}
-  init_file::Vector{String}
-  cmds::Vector{Cmd}
-  sample_file::Vector{String}
-  log_file::Vector{String}
-  diagnostic_file::Vector{String}
-  summary::Bool
-  printsummary::Bool
-  sm::StanRun.StanModel
+struct VariationalModel <: CmdStanModels
+  @shared_fields_stanmodels
+  method::Variational
 end
 
-function CmdStanVariationalModel(
+function VariationalModel(
   name::AbstractString,
   model::AbstractString,
   n_chains=[4];
   method = Variational(),
-  random = Random(),
-  init = Init(),
-  output = Output(),
+  seed = StanBase.RandomSeed(),
+  init = StanBase.Init(),
+  output = StanBase.Output(),
   tmpdir = mktempdir())
   
   !isdir(tmpdir) && mkdir(tmpdir)
   
-  update_model_file(joinpath(tmpdir, "$(name).stan"), strip(model))
+  StanBase.update_model_file(joinpath(tmpdir, "$(name).stan"), strip(model))
   sm = StanModel(joinpath(tmpdir, "$(name).stan"))
   
-  output_base = default_output_base(sm)
+  output_base = StanRun.default_output_base(sm)
   exec_path = StanRun.ensure_executable(sm)
   
   stan_compile(sm)
   
-  CmdStanVariationalModel(name, model, n_chains, method, random, init, output,
+  VariationalModel(name, model, n_chains, seed, init, output,
     tmpdir, output_base, exec_path, String[], String[], 
-    Cmd[], String[], String[], String[], false, false, sm)
+    Cmd[], String[], String[], String[], false, false, sm, method)
 end
 
-function model_show(io::IO, m::CmdStanVariationalModel, compact::Bool)
+function variational_show(io::IO, m::VariationalModel, compact::Bool)
   println("  name =                    \"$(m.name)\"")
   println("  n_chains =                $(get_n_chains(m))")
   println("  output =                  Output()")
@@ -91,4 +72,4 @@ function model_show(io::IO, m::CmdStanVariationalModel, compact::Bool)
   variational_show(io, m.method, compact)
 end
 
-show(io::IO, m::CmdStanVariationalModel) = model_show(io, m, false)
+show(io::IO, m::VariationalModel) = variational_show(io, m, false)
