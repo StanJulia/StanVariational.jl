@@ -21,7 +21,7 @@ function read_variational(m::VariationalModel)
   
   ftype = "chain"
   
-  for i in 1:get_n_chains(m)
+  for i in 1:StanBase.get_n_chains(m)
     if isfile("$(m.output_base)_$(ftype)_$(i).csv")
       instream = open("$(m.output_base)_$(ftype)_$(i).csv")
       skipchars(isspace, instream, linecomment='#')
@@ -30,7 +30,8 @@ function read_variational(m::VariationalModel)
       index = [idx[k] for k in 1:length(idx)]
       indvec = 1:length(index)
       if i == 1
-        a3d = fill(0.0, m.method.output_samples, length(indvec), get_n_chains(m))
+        a3d = fill(0.0, m.method.output_samples, length(indvec), 
+          StanBase.get_n_chains(m))
       end
       skipchars(isspace, instream, linecomment='#')
       for j in 1:m.method.output_samples
