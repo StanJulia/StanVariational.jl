@@ -19,7 +19,7 @@ cmdline(m)
 ?CmdStanSampleModel                      : Create a CmdStanSampleModel
 ```
 """
-function cmdline(m::Union{VariationalModel, Variational, StanBase.RandomSeed}, id)
+function cmdline(m::Union{VariationalModel, Variational}, id)
   
   #=
   `/Users/rob/.julia/dev/StanVariational/examples/Bernoulli/tmp/bernoulli 
@@ -40,7 +40,7 @@ function cmdline(m::Union{VariationalModel, Variational, StanBase.RandomSeed}, i
     cmd = `$cmd $(cmdline(getfield(m, :method), id))`
     
     # Common to all models
-    cmd = `$cmd $(cmdline(getfield(m, :seed), id))`
+    cmd = `$cmd random seed=$(getfield(m, :seed).seed)`
     
     # Init file required?
     if length(m.init_file) > 0 && isfile(m.init_file[id])
@@ -67,11 +67,7 @@ function cmdline(m::Union{VariationalModel, Variational, StanBase.RandomSeed}, i
   else
     
     # The 'recursive' part
-    if typeof(m) == StanBase.RandomSeed
-      cmd = `$cmd random`
-    else
-      cmd = `$cmd $(split(lowercase(string(typeof(m))), '.')[end])`
-    end
+    cmd = `$cmd $(split(lowercase(string(typeof(m))), '.')[end])`
     for name in fieldnames(typeof(m))
       cmd = `$cmd $(name)=$(getfield(m, name))`
     end

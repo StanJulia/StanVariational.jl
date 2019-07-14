@@ -24,8 +24,11 @@ include("stanmodel/VariationalModel.jl")
 include("stanrun/cmdline.jl")
 include("stansamples/read_variational.jl")
 
+stan_variational = stan_sample
+
 export
   VariationalModel,
+  stan_variational,
   read_variational
 
 end # module
