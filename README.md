@@ -15,10 +15,10 @@
 
 ## Installation
 
-This package is not registered. Install with
+This package is registered. Install with
 
 ```julia
-pkg> add https://github.com/StanJulia/StanVariational.jl
+pkg> add StanVariational.jl
 ```
 
 You need a working [cmdstan](https://mc-stan.org/users/interfaces/cmdstan.html) installation, the path of which you should specify in `JULIA_CMDSTAN_HOME`, eg in your `~/.julia/config/startup.jl` have a line like
