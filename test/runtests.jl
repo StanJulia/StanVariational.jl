@@ -23,7 +23,7 @@ stanmodel = VariationalModel("bernoulli", bernoulli_model)
 
 if sample_file !== Nothing
 
-  @testset "Bernoulli optimize example" begin
+  @testset "Bernoulli variational example" begin
     # Read sample summary (in ChainDataFrame format)
     sdf = read_summary(stanmodel)
 
