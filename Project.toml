@@ -19,7 +19,7 @@ StanSamples = "52d0d7a9-b304-5f31-a727-b234d0b606ff"
 Unicode = "4ec0a83e-493e-50e2-b9ac-8f72acf5a8f5"
 
 [compat]
-DataFrames = "0.19"
+DataFrames = "0.19, 0.20"
 DocStringExtensions = "0.8"
 MCMCChains = "0.4"
 NamedTupleTools = "0.11, 0.12"
