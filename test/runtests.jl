@@ -27,7 +27,7 @@ if success(rc)
     # Read sample summary (in ChainDataFrame format)
     sdf = read_summary(stanmodel)
 
-    @test sdf[:theta, :mean][1] ≈ 0.32 atol=0.1
+    @test sdf[sdf.parameters .== :theta, :mean][1] ≈ 0.32 atol=0.1
   end
 
 end

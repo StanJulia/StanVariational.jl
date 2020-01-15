@@ -36,6 +36,6 @@ if success(rc)
   println()
 
   # Retrieve mean value of theta from the summary
-  sdf[:theta, :mean]
+  sdf[sdf.parameters .== :theta, :mean]
 
 end

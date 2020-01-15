@@ -11,7 +11,7 @@ using DocStringExtensions: FIELDS, SIGNATURES, TYPEDEF
 
 import StanBase: stan_sample, get_cmdstan_home
 import StanBase: cmdline, read_summary, stan_summary
-import StanBase: RandomSeed, Init, Output
+import StanBase: RandomSeed, Init, Output, StanModelError
 
 include("stanmodel/variational_types.jl")
 include("stanmodel/VariationalModel.jl")
@@ -22,6 +22,7 @@ stan_variational = stan_sample
 
 export
   VariationalModel,
+  StanModelError,
   stan_variational,
   read_variational,
   read_summary,
