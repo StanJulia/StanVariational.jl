@@ -1,33 +1,39 @@
 using StanVariational
 using Test
 
-bernoulli_model = "
-data { 
-  int<lower=1> N; 
-  int<lower=0,upper=1> y[N];
-} 
-parameters {
-  real<lower=0,upper=1> theta;
-} 
-model {
-  theta ~ beta(1,1);
-  y ~ bernoulli(theta);
-}
-";
+if haskey(ENV, "JULIA_CMDSTAN_HOME")
 
-bernoulli_data = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
+  bernoulli_model = "
+  data { 
+    int<lower=1> N; 
+    int<lower=0,upper=1> y[N];
+  } 
+  parameters {
+    real<lower=0,upper=1> theta;
+  } 
+  model {
+    theta ~ beta(1,1);
+    y ~ bernoulli(theta);
+  }
+  ";
 
-stanmodel = VariationalModel("bernoulli", bernoulli_model)
+  bernoulli_data = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 
-rc = stan_variational(stanmodel; data=bernoulli_data)
+  stanmodel = VariationalModel("bernoulli", bernoulli_model)
 
-if success(rc)
+  rc = stan_variational(stanmodel; data=bernoulli_data)
 
-  @testset "Bernoulli variational example" begin
-    # Read sample summary (in ChainDataFrame format)
-    sdf = read_summary(stanmodel)
+  if success(rc)
 
-    @test sdf[sdf.parameters .== :theta, :mean][1] ≈ 0.32 atol=0.1
+    @testset "Bernoulli variational example" begin
+      # Read sample summary (in ChainDataFrame format)
+      sdf = read_summary(stanmodel)
+
+      @test sdf[sdf.parameters .== :theta, :mean][1] ≈ 0.32 atol=0.1
+    end
+
   end
 
+else
+  println("\nJULIA_CMDSTAN_HOME not set. Skipping tests")
 end
