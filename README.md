@@ -1,13 +1,20 @@
 # StanVariational.jl
 
-![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)<!--
-![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
-![Lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)
-![Lifecycle](https://img.shields.io/badge/lifecycle-retired-orange.svg)
-![Lifecycle](https://img.shields.io/badge/lifecycle-archived-red.svg)
-![Lifecycle](https://img.shields.io/badge/lifecycle-dormant-blue.svg) -->
-[![Build Status](https://travis-ci.com/goedman/StanVariational.jl.svg?branch=master)](https://travis-ci.com/goedman/StanVariational.jl)
-[![codecov.io](http://codecov.io/github/goedman/StanVariational.jl/coverage.svg?branch=master)](http://codecov.io/github/goedman/StanVariational.jl?branch=master)
+| **Project Status**          |  **Build Status** |
+|:---------------------------:|:-----------------:|
+|![][project-status-img] | ![][CI-build] |
+
+[docs-dev-img]: https://img.shields.io/badge/docs-dev-blue.svg
+[docs-dev-url]: https://stanjulia.github.io/StanVariational.jl/latest
+
+[docs-stable-img]: https://img.shields.io/badge/docs-stable-blue.svg
+[docs-stable-url]: https://stanjulia.github.io/StanVariational.jl/stable
+
+[CI-build]: https://github.com/stanjulia/StanVariational.jl/workflows/CI/badge.svg?branch=master
+
+[issues-url]: https://github.com/stanjulia/StanVariational.jl/issues
+
+[project-status-img]: https://img.shields.io/badge/lifecycle-wip-orange.svg
 
 ## Important note
 
