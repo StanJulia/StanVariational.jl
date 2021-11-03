@@ -6,26 +6,32 @@ Helper infrastructure to compile and sample models using `cmdstan`.
 """
 module StanVariational
 
-using StanBase
+using CSV, DelimitedFiles, Unicode
+using NamedTupleTools, Parameters
+using StanDump, DataFrames
+
 using DocStringExtensions: FIELDS, SIGNATURES, TYPEDEF
 
-import StanBase: stan_sample, get_cmdstan_home
-import StanBase: cmdline, read_summary, stan_summary
-import StanBase: RandomSeed, Init, Output, StanModelError
+import StanSample: stan_summary, read_summary
 
-include("stanmodel/variational_types.jl")
+include("common/common_definitions.jl")
+include("common/update_model_file.jl")
+include("common/par.jl")
+
 include("stanmodel/VariationalModel.jl")
-include("stanrun/cmdline.jl")
-include("stansamples/read_variational.jl")
 
-stan_variational = stan_sample
+include("stanrun/stan_run.jl")
+include("stanrun/cmdline.jl")
+
+include("stansamples/read_variational.jl")
+include("stansamples/read_summary.jl")
+include("stansamples/stan_summary.jl")
+
+stan_variational = stan_run
 
 export
   VariationalModel,
-  StanModelError,
   stan_variational,
-  read_variational,
-  read_summary,
-  stan_summary
+  read_variational
 
 end # module
