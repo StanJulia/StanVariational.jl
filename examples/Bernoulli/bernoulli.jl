@@ -21,9 +21,7 @@ data = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 # Keep tmpdir across multiple runs to prevent re-compilation
 tmpdir = joinpath(@__DIR__, "tmp")
 
-sm = VariationalModel(
-  "bernoulli", bernoulli_model, tmpdir)
-
+sm = VariationalModel("bernoulli", bernoulli_model, tmpdir)
 rc = stan_variational(sm; data)
 
 if success(rc)

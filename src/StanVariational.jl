@@ -23,8 +23,6 @@ include("stanrun/stan_run.jl")
 include("stanrun/cmdline.jl")
 
 include("stansamples/read_variational.jl")
-#include("stansamples/read_summary.jl")
-#include("stansamples/stan_summary.jl")
 
 stan_variational = stan_run
 
