@@ -1,4 +1,4 @@
-import Base: show
+import Base: showu
 
 mutable struct VariationalModel <: CmdStanModels
     name::AbstractString;              # Name of the Stan program

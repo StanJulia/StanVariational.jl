@@ -20,9 +20,7 @@ After completion a ..._summary.csv file has been created.
 This file can be read as a DataFrame in by `df = read_summary(model)`
 
 """
-function stan_summary(
-  m::T, 
-  printsummary=false) where {T <: CmdStanModels}
+function stan_summary(m::VariationalModel, printsummary=false)
   
   #local csvfile
   n_chains = m.num_chains

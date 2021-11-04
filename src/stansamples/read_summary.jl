@@ -24,7 +24,7 @@ $(SIGNATURES)
 ```
 
 """
-function read_summary(m::T, printsummary=false) where {T <: CmdStanModels}
+function read_summary(m::VariationalModel, printsummary=false)
 
   fname = "$(m.output_base)_summary.csv"
   !isfile(fname) && stan_summary(m, printsummary)
