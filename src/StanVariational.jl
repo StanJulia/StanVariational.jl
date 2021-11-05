@@ -14,7 +14,7 @@ using DocStringExtensions: FIELDS, SIGNATURES, TYPEDEF
 
 using StanBase
 
-import StanBase: update_model_file, par
+import StanBase: update_model_file, par, handle_keywords!
 import StanBase: executable_path, ensure_executable, stan_compile
 
 include("stanmodel/VariationalModel.jl")

@@ -22,7 +22,7 @@ data = Dict("N" => 10, "y" => [0, 1, 0, 1, 0, 0, 0, 0, 0, 1])
 tmpdir = joinpath(@__DIR__, "tmp")
 
 sm = VariationalModel("bernoulli", bernoulli_model, tmpdir)
-rc = stan_variational(sm; data)
+rc = stan_variational(sm; data, test=5)
 
 if success(rc)
 

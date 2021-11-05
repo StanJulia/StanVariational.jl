@@ -3,38 +3,32 @@ import Base: show
 mutable struct VariationalModel <: CmdStanModels
     name::AbstractString;              # Name of the Stan program
     model::AbstractString;             # Stan language model program
+
     # Sample fields
     num_chains::Int64;                 # Number of chains
     num_threads::Int64;                # Number of threads
-    num_samples::Int;                  # Number of draws after warmup
-    num_warmups::Int;                  # Number of warmup draws
-    save_warmup::Bool;                 # Store warmup_samples
-    thin::Int;                         # Thinning of draws
-    seed::Int;                         # Seed section of cmd to run cmdstan
-    refresh::Int                       # Display progress in output files
-    init_bound::Int                    # Bound for initial param values
 
-    # Adapt fields
+    seed::Int;                         # Seed section of cmd to run cmdstan
+    refresh::Int;                      # Display progress in output files
+    init_bound::Int;                   # Bound for initial param values
 
     # Algorithm fields
     algorithm::Symbol;                 # :meanfield or :fullrank
 
-    iter::Int                          # Maximum no of ADVI iterations
-    grad_samples::Int                  # Number of draws to compute gradient
-    elbo_samples::Int                  # Number of draws for ELBO estimate
-    eta::Float64                       # Stepsize scaling parameter
+    iter::Int;                         # Maximum no of ADVI iterations
+    grad_samples::Int;                 # Number of draws to compute gradient
+    elbo_samples::Int;                 # Number of draws for ELBO estimate
+    eta::Float64;                      # Stepsize scaling parameter
 
     # Adapt fields
-    engaged::Bool                      # Eta adaptation active
-    adapt_iter::Int                    # No of iterations for eta adaptation
+    engaged::Bool;                     # Eta adaptation active
+    adapt_iter::Int;                   # No of iterations for eta adaptation
 
-    tol_rel_obj::Float64               # Tolerance for convergence
-    eval_elbo::Int                     # No of iterations between ELBO evaluations
-    output_samples::Int                # Approximate no of posterior draws to save
+    tol_rel_obj::Float64;              # Tolerance for convergence
+    eval_elbo::Int;                    # No of iterations between ELBO evaluations
+    output_samples::Int;               # Approximate no of posterior draws to save
 
-    # Output files
     output_base::AbstractString;       # Used for file paths to be created
-    # Tmpdir setting
     tmpdir::AbstractString;            # Holds all created files
     exec_path::AbstractString;         # Path to the cmdstan excutable
     data_file::Vector{AbstractString}; # Array of data files input to cmdstan
@@ -87,10 +81,10 @@ function VariationalModel(
     end
 
     VariationalModel(name, model, 
-        # num_chains, num_threads, num_samples, num_warmups, save_warmups
-        4, 4, 1000, 1000, false,
-        # thin, seed, refresh, init_bound
-        1, -1, 100, 2,
+        # num_chains, num_threads
+        4, 4, 
+        # seed, refresh, init_bound
+        -1, 100, 2,
 
         # Variational settings
         :meanfield,                    # algorithm
@@ -133,10 +127,10 @@ function Base.show(io::IO, ::MIME"text/plain", m::VariationalModel)
     println(io, "  name =                    ", m.name)
     println(io, "  num_chains =              ", m.num_chains)
     println(io, "  num_threads =             ", m.num_threads)
-    println(io, "  num_samples =             ", m.num_samples)
-    println(io, "  num_warmups =             ", m.num_warmups)
-    println(io, "  save_warmup =             ", m.save_warmup)
-    println(io, "  thin =                    ", m.thin)
+    #println(io, "  num_samples =             ", m.num_samples)
+    #println(io, "  num_warmups =             ", m.num_warmups)
+    #println(io, "  save_warmup =             ", m.save_warmup)
+    #println(io, "  thin =                    ", m.thin)
     println(io, "  seed =                    ", m.seed)
     println(io, "  refresh =                 ", m.refresh)
     println(io, "  init_bound =              ", m.init_bound)
