@@ -101,24 +101,15 @@ function VariationalModel(
         100,                           # eval_elbo
         1000,                          # output_samples
 
-        # Ouput settings
-        output_base,
-        # Tmpdir settings
-        tmpdir,
-        # exec_path
-        exec_path,
-        # Data files
-        AbstractString[],
-        # Init files
-        AbstractString[],  
-        # Command lines
-        Cmd[],
-        # Sample .csv files  
-        String[],
-        # Log files
-        String[],
-        # Diagnostic files
-        String[],
+        output_base,                   # Path to output files
+        tmpdir,                        # Tmpdir settings
+        exec_path,                     # Exec_path
+        AbstractString[],              # Data files
+        AbstractString[],              # Init files
+        Cmd[],                         # Command lines
+        String[],                      # Sample .csv files
+        String[],                      # Log files
+        String[],                      # Diagnostic files
         cmdstan_home)
 end
 
@@ -127,10 +118,6 @@ function Base.show(io::IO, ::MIME"text/plain", m::VariationalModel)
     println(io, "  name =                    ", m.name)
     println(io, "  num_chains =              ", m.num_chains)
     println(io, "  num_threads =             ", m.num_threads)
-    #println(io, "  num_samples =             ", m.num_samples)
-    #println(io, "  num_warmups =             ", m.num_warmups)
-    #println(io, "  save_warmup =             ", m.save_warmup)
-    #println(io, "  thin =                    ", m.thin)
     println(io, "  seed =                    ", m.seed)
     println(io, "  refresh =                 ", m.refresh)
     println(io, "  init_bound =              ", m.init_bound)

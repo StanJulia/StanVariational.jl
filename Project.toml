@@ -1,7 +1,7 @@
 name = "StanVariational"
 uuid = "6ede68ce-8466-5085-8a79-4c4de3d9cf4a"
 authors = ["Rob J Goedman <goedman@mac.com>"]
-version = "3.0.1"
+version = "3.0.2"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
