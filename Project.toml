@@ -1,7 +1,7 @@
 name = "StanVariational"
 uuid = "6ede68ce-8466-5085-8a79-4c4de3d9cf4a"
 authors = ["Rob J Goedman <goedman@mac.com>"]
-version = "3.0.2"
+version = "3.1.0"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
@@ -23,7 +23,7 @@ DocStringExtensions = "0.8"
 Documenter = "0.27"
 NamedTupleTools = "0.13"
 Parameters = "0.12"
-StanBase = "3.0"
+StanBase = "3.1"
 StanDump = "0.2"
 julia = "1"
 
