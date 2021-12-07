@@ -60,7 +60,7 @@ Create a VariationalModel and compile the Stan Language Model..
 function VariationalModel(
     name::AbstractString,
     model::AbstractString,
-    tmpdir = mktempdir())
+    tmpdir = CMDSTAN_HOME)
 
     !isdir(tmpdir) && mkdir(tmpdir)
 
