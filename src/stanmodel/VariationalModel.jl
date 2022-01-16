@@ -68,7 +68,7 @@ function VariationalModel(
 
     output_base = joinpath(tmpdir, name)
     exec_path = executable_path(output_base)
-    cmdstan_home = get_cmdstan_home()
+    cmdstan_home = CMDSTAN_HOME
 
     error_output = IOBuffer()
     is_ok = cd(cmdstan_home) do
