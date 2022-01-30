@@ -7,6 +7,7 @@ Sample from a StanJulia VariationalModel (<: CmdStanModel.)
 ## Required argument
 ```julia
 * `m::VariationalModel`                # VariationalModel.
+* `use_json=true`                      # Use JSON3 for data and init files
 ```
 
 ### Most frequently used keyword arguments
@@ -47,7 +48,7 @@ See extended help for other keyword arguments ( `??stan_sample` ).
 * `output_samples=1000`                # Approximate no of posterior draws to save
 ```
 """
-function stan_run(m::T; kwargs...) where {T <: CmdStanModels}
+function stan_run(m::T, use_json=true; kwargs...) where {T <: CmdStanModels}
 
     handle_keywords!(m, kwargs)
     
@@ -64,10 +65,17 @@ function stan_run(m::T; kwargs...) where {T <: CmdStanModels}
         isfile(sfile) && rm(sfile)
     end
 
-    :init in keys(kwargs) && update_R_files(m, kwargs[:init],
-        m.num_chains, "init")
-    :data in keys(kwargs) && update_R_files(m, kwargs[:data],
-        m.num_chains, "data")
+    if use_json
+        :init in keys(kwargs) && update_json_files(m, kwargs[:init],
+            m.num_chains, "init")
+        :data in keys(kwargs) && update_json_files(m, kwargs[:data],
+            m.num_chains, "data")
+    else
+        :init in keys(kwargs) && update_R_files(m, kwargs[:init],
+            m.num_chains, "init")
+        :data in keys(kwargs) && update_R_files(m, kwargs[:data],
+            m.num_chains, "data")
+    end
 
     m.cmds = [stan_cmds(m, id; kwargs...) for id in 1:m.num_chains]
 
