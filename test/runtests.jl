@@ -1,5 +1,5 @@
 using StanVariational
-using Test
+using Statistics, Test
 
 if haskey(ENV, "JULIA_CMDSTAN_HOME") || haskey(ENV, "CMDSTAN")
 
@@ -27,9 +27,18 @@ if haskey(ENV, "JULIA_CMDSTAN_HOME") || haskey(ENV, "CMDSTAN")
 
     @testset "Bernoulli variational example" begin
       # Read sample summary (in ChainDataFrame format)
-      sdf = read_summary(stanmodel)
-
-      @test sdf[sdf.parameters .== :theta, :mean][1] ≈ 0.32 atol=0.1
+      samples, cnames = read_variational(stanmodel)
+      ms = mean(samples; dims=1)
+      #ms |> display
+      #ms[1, 2, 1] |> display
+      @test ms[1, 2, 1] ≈ -8.2 atol=0.2
+      @test ms[1, 2, 2] ≈ -8.2 atol=0.2
+      @test ms[1, 2, 3] ≈ -8.2 atol=0.2
+      @test ms[1, 2, 4] ≈ -8.2 atol=0.2
+      @test ms[1, 3, 1] ≈ -0.5 atol=0.1
+      @test ms[1, 3, 2] ≈ -0.5 atol=0.1
+      @test ms[1, 3, 3] ≈ -0.5 atol=0.1
+      @test ms[1, 3, 4] ≈ -0.5 atol=0.1
     end
 
   end

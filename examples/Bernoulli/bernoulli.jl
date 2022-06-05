@@ -28,13 +28,4 @@ if success(rc)
 
   (samples, names) = read_variational(sm)
 
-  # Show the same output in DataFrame format
-  sdf = StanVariational.read_summary(sm)
-  println()
-  display(sdf)
-  println()
-
-  # Retrieve mean value of theta from the summary
-  sdf[sdf.parameters .== :theta, :mean]
-
 end
