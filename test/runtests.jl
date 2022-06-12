@@ -31,10 +31,10 @@ if haskey(ENV, "JULIA_CMDSTAN_HOME") || haskey(ENV, "CMDSTAN")
       ms = mean(samples; dims=1)
       #ms |> display
       #ms[1, 2, 1] |> display
-      @test ms[1, 2, 1] ≈ -8.2 atol=0.2
-      @test ms[1, 2, 2] ≈ -8.2 atol=0.2
-      @test ms[1, 2, 3] ≈ -8.2 atol=0.2
-      @test ms[1, 2, 4] ≈ -8.2 atol=0.2
+      @test ms[1, 2, 1] ≈ -8.2 atol=0.3
+      @test ms[1, 2, 2] ≈ -8.2 atol=0.3
+      @test ms[1, 2, 3] ≈ -8.2 atol=0.3
+      @test ms[1, 2, 4] ≈ -8.2 atol=0.3
       @test ms[1, 3, 1] ≈ -0.5 atol=0.1
       @test ms[1, 3, 2] ≈ -0.5 atol=0.1
       @test ms[1, 3, 3] ≈ -0.5 atol=0.1
