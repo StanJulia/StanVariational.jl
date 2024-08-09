@@ -31,7 +31,7 @@ pkg> add StanVariational.jl
 You need a working [cmdstan](https://mc-stan.org/users/interfaces/cmdstan.html) installation, the path of which you should specify either in `CMDSTAN` or `JULIA_CMDSTAN_HOME`, eg in your `~/.julia/config/startup.jl` have a line like
 ```julia
 # CmdStan setup
-ENV["CMDSTAN"] = expanduser("~/src/cmdstan-2.34.1/") # replace with your path
+ENV["CMDSTAN"] = expanduser("~/src/cmdstan-2.35.0/") # replace with your path
 ```
 
 ## Usage
